@@ -8,10 +8,10 @@ class Singleton:
             Singleton._instance = self
 
     @classmethod
-    def get_instance(self):
-        if self._instance is None:
-            self._instance = Singleton()
-        return self._instance
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = Singleton()
+        return cls._instance
 
 singleton_instance = Singleton.get_instance()
 
