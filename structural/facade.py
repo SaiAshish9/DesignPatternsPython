@@ -8,7 +8,6 @@ class CoffeeOrder(ABC):
 class CoffeeFlavor(CoffeeOrder):
     def __init__(self, flavor):
         self.flavor = flavor
-
     def serve_coffee(self, context):
         return f"Serving {self.flavor} to table {context.table_number}"
 
@@ -18,7 +17,6 @@ class CoffeeOrderContext:
 
 class CoffeeFlavorFactory:
     flavors = {}
-
     def get_flavor(self, flavor_name):
         if flavor_name not in self.flavors:
             self.flavors[flavor_name] = CoffeeFlavor(flavor_name)
@@ -32,7 +30,6 @@ if __name__ == "__main__":
         ("Cappuccino", 4),
         ("Espresso", 5),
     ]
-
     flavor_factory = CoffeeFlavorFactory()
     for flavor_name, table_number in orders:
         flavor = flavor_factory.get_flavor(flavor_name)
