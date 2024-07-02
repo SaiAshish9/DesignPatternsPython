@@ -34,7 +34,6 @@ if __name__ == "__main__":
     ]
 
     flavor_factory = CoffeeFlavorFactory()
-
     for flavor_name, table_number in orders:
         flavor = flavor_factory.get_flavor(flavor_name)
         context = CoffeeOrderContext(table_number)
