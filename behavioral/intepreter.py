@@ -32,4 +32,5 @@ if __name__ == "__main__":
     context = {}
     expression = Subtract(Add(Number(5), Number(3)), Number(2))
     result = expression.interpret(context)
-    print(f"Result: {result}")  # Output: Result: 6
+    print(f"Result: {result}")  
+    
