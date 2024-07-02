@@ -56,3 +56,12 @@ class TextEditorInvoker:
             command = self.redo_stack.pop()
             command.execute()
            
+if __name__ == "__main__":
+    editor = TextEditor()
+    invoker = TextEditorInvoker()
+    write_hello = WriteCommand(editor, "Hello, ")
+    write_world = WriteCommand(editor, "world!")
+    invoker.execute_command(write_hello)
+    invoker.execute_command(write_world)
+    invoker.undo()
+    invoker.redo()
