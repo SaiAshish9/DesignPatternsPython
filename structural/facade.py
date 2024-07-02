@@ -11,7 +11,6 @@ class ImageRenderer:
     def render_image(self, file):
         print(f"Rendering image file: {file}")
 
-# Facade
 class MultimediaFacade:
     def __init__(self):
         self.audio_player = AudioPlayer()
