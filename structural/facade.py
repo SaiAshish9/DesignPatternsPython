@@ -1,4 +1,4 @@
-# Subsystem Classes
+# Simplifiy the functionalities of various classes
 class AudioPlayer:
     def play_audio(self, file):
         print(f"Playing audio file: {file}")
