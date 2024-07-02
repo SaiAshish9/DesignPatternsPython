@@ -43,3 +43,25 @@ def singleton(cls):
 class Singleton:
     def __init__(self):
         pass
+
+class Singleton:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(Singleton, cls).__new__(cls)
+            cls._initialize()
+        return cls._instance
+
+    @classmethod
+    def _initialize(cls):
+        pass
+
+    @classmethod
+    def get_instance(cls):
+        return cls()
+
+singleton1 = Singleton.get_instance()
+singleton2 = Singleton.get_instance()
+
+print(singleton1 is singleton2)  # True
