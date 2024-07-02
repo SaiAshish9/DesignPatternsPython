@@ -26,6 +26,8 @@ class ProxyImage(Image):
             self.real_image = RealImage(self.filename)
         self.real_image.display()
 
+# can be used for authorization as well.
+
 if __name__ == "__main__":
     image1 = ProxyImage("image1.jpg")
     image2 = ProxyImage("image2.jpg")
