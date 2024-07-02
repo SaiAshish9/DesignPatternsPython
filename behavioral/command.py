@@ -30,7 +30,6 @@ class SellStock(Order):
     def execute(self):
         self.stock.sell()
 
-# Invoker
 class Broker:
     def __init__(self):
         self.order_list = []
