@@ -5,7 +5,6 @@ class Prototype(ABC):
     def clone(self):
         pass
 
-
 class Car(Prototype):
     def __init__(self, model, color):
         self.model = model
@@ -17,6 +16,7 @@ class Car(Prototype):
     def __str__(self):
         return f"Car: Model {self.model}, Color {self.color}"
 
+# Usage
 car_prototype = Car("Prototype Model", "Red")
 print(f"Original Car: {car_prototype}")
 
