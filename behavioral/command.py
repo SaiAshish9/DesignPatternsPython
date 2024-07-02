@@ -1,67 +1,56 @@
 from abc import ABC, abstractmethod
 
-class Command(ABC):
+class Order(ABC):
     @abstractmethod
     def execute(self):
         pass
 
-    @abstractmethod
-    def undo(self):
-        pass
+class Stock:
+    def __init__(self, name="ABC", quantity=10):
+        self.name = name
+        self.quantity = quantity
 
-class WriteCommand(Command):
-    def __init__(self, receiver, text):
-        self.receiver = receiver
-        self.text = text
+    def buy(self):
+        print(f"Stock [ Name: {self.name}, Quantity: {self.quantity} ] bought")
+
+    def sell(self):
+        print(f"Stock [ Name: {self.name}, Quantity: {self.quantity} ] sold")
+
+class BuyStock(Order):
+    def __init__(self, stock):
+        self.stock = stock
 
     def execute(self):
-        self.receiver.write(self.text)
+        self.stock.buy()
 
-    def undo(self):
-        self.receiver.undo_write(self.text)
+class SellStock(Order):
+    def __init__(self, stock):
+        self.stock = stock
 
-class TextEditor:
+    def execute(self):
+        self.stock.sell()
+
+# Invoker
+class Broker:
     def __init__(self):
-        self.content = ""
-        self.history = []
+        self.order_list = []
 
-    def write(self, text):
-        self.history.append(self.content)
-        self.content += text
-        print(f"Current content: '{self.content}'")
+    def take_order(self, order):
+        self.order_list.append(order)
 
-    def undo_write(self, text):
-        if self.history:
-            self.content = self.history.pop()
-        print(f"Undo: current content: '{self.content}'")
+    def place_orders(self):
+        for order in self.order_list:
+            order.execute()
+        self.order_list.clear()
 
-class TextEditorInvoker:
-    def __init__(self):
-        self.history = []
-        self.redo_stack = []
-
-    def execute_command(self, command):
-        self.history.append(command)
-        command.execute()
-        self.redo_stack.clear()
-
-    def undo(self):
-        if self.history:
-            command = self.history.pop()
-            command.undo()
-            self.redo_stack.append(command)
-
-    def redo(self):
-        if self.redo_stack:
-            command = self.redo_stack.pop()
-            command.execute()
-           
 if __name__ == "__main__":
-    editor = TextEditor()
-    invoker = TextEditorInvoker()
-    write_hello = WriteCommand(editor, "Hello, ")
-    write_world = WriteCommand(editor, "world!")
-    invoker.execute_command(write_hello)
-    invoker.execute_command(write_world)
-    invoker.undo()
-    invoker.redo()
+    abc_stock = Stock()
+
+    buy_stock_order = BuyStock(abc_stock)
+    sell_stock_order = SellStock(abc_stock)
+
+    broker = Broker()
+    broker.take_order(buy_stock_order)
+    broker.take_order(sell_stock_order)
+
+    broker.place_orders()
