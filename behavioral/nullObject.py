@@ -1,11 +1,14 @@
-# Abstract Class
-class AbstractCustomer:
+from abc import ABC, abstractmethod
+
+class AbstractCustomer(ABC):
     def __init__(self):
         self.name = None
-
+    
+    @abstractmethod
     def is_nil(self):
         pass
 
+    @abstractmethod
     def get_name(self):
         pass
 
