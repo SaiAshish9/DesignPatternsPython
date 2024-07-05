@@ -15,7 +15,7 @@ class TemperatureAdapter(TemperatureProvider):
 
     def get_temperature(self):
         celsius_temperature = self.sensor.get_temperature_celsius()
-        fahrenheit_temperature = celsius_temperature * 9 / 5 + 32
+        fahrenheit_temperature = (celsius_temperature * 9 / 5) + 32
         return fahrenheit_temperature
 
 if __name__ == "__main__":
